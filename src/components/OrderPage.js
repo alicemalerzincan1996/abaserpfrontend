@@ -29,7 +29,8 @@ function OrderPage() {
 
   const saveOrder = () => {
     Axios.post("http://localhost:9094/siparis/savex", cart)
-      .then(response => console.log('Sipariş kaydedildi:', response.data))
+      .then(response => console.log('Sipariş kaydedildi:', response.data),
+      window.location.reload())
       .catch(error => console.error('Sipariş kaydedilirken hata oluştu', error));
   };
 

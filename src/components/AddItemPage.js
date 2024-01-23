@@ -30,6 +30,9 @@ function AddItemPage() {
         birim_fiyati_tl: price
       });
       console.log('Server Response:', response.data);
+      window.location.reload();
+
+      
     } catch (error) {
       console.error('Something went wrong!', error);
     }

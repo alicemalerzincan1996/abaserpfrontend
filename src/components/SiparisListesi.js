@@ -56,12 +56,23 @@ function SiparisListesi() {
   const [selectedSiparisId, setSelectedSiparisId] = useState('');
   const sepeteIdIleEkle = () => {
     const siparis = siparisler.find(s => s.id.toString() === selectedSiparisId);
-    if (siparis) {
-      siparis.satilanurunList.forEach(urun => {
-        sepeteEkle(siparis.id);
-      });
+  
+    if (!siparis) {
+      console.error("Sipariş bulunamadı");
+      return;
     }
+  
+    // Sepette zaten bu sipariş var mı kontrol et
+    const sepetteVarMi = sepetx.some(item => item.siparisId === siparis.id);
+    if (sepetteVarMi) {
+      alert("Bu sipariş zaten sepette!");
+      return;
+    }
+  
+    // Siparişi sepete ekle
+    setSepet(prevSepet => [...prevSepet, { siparisId: siparis.id }]);
   };
+  
 
   useEffect(() => {
     Axios.get("http://localhost:9094/siparis/getall")
